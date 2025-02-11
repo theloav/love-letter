@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Letter for Dharshini</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        .letter-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .closed {
+            transform: scale(1.1) rotateX(0deg);
+            height: 80px;
+            overflow: hidden;
+        }
+
+        .open {
+            transform: scale(1) rotateX(0deg);
+            height: auto;
+            overflow: visible;
+        }
+
+        .letter-content {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        h1 {
+            color: #ff4b6e;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        p {
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .signature {
+            text-align: right;
+            font-style: italic;
+            color: #ff4b6e;
+            margin-top: 2rem;
+        }
+
+        .date {
+            text-align: right;
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="letter-container closed" onclick="toggleLetter()">
+        <div class="letter-content">
+            <div class="date">December 14, 2023</div>
+            <h1>Dear Dharshini ❤️</h1>
+            <p>My love,</p>
+            <p>I heard you're not feeling well, and it breaks my heart to know you're under the weather. I wish I could be there right beside you, taking care of you and making you feel better.</p>
+            <p>Remember that you're the strongest person I know, and this is just temporary. Soon you'll be back to your cheerful, amazing self. Until then, please take good care of yourself.</p>
+            <p>I'm sending you all my love and warm hugs through this letter. Each word carries my care and affection for you.</p>
+            <p>Get well soon, my dear. I love you more than words can express.</p>
+            <div class="signature">With all my love ❤️</div>
+        </div>
+    </div>
+
+    <script>
+        function toggleLetter() {
+            const letter = document.querySelector('.letter-container');
+            letter.classList.toggle('closed');
+            letter.classList.toggle('open');
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            heart.style.position = 'fixed';
+            heart.style.top = '100%';
+            heart.style.opacity = '0';
+            document.body.appendChild(heart);
+
+            const animation = heart.animate([
+                { transform: 'translateY(0)', opacity: 1 },
+                { transform: 'translateY(-100vh)', opacity: 0 }
+            ], {
+                duration: 5000,
+                easing: 'linear'
+            });
+
+            animation.onfinish = () => heart.remove();
+        }
+
+        setInterval(createHeart, 300);
+    </script>
+</body>
+</html>
